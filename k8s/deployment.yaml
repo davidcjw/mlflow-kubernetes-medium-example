@@ -18,14 +18,14 @@ spec:
         - name: mlflow-tracking-server-pod
           image: davidcjw/example-mlflow:1.0
           ports:
-            - containerPort: 8080
+            - containerPort: 5000
           resources:
             limits:
-              memory: 512Mi
-              cpu: "1"
+              memory: 1Gi
+              cpu: "2"
             requests:
-              memory: 256Mi
-              cpu: "0.2"
+              memory: 1Gi
+              cpu: "1"
           imagePullPolicy: Always
           env:
           - name: DB_PASSWORD
@@ -65,7 +65,7 @@ spec:
   selector:
     app: mlflow-tracking-server-pods
   ports:
-  - port: 8080
+  - port: 5000
     protocol: TCP
-    targetPort: 8080
+    targetPort: 5000
     nodePort: 30100

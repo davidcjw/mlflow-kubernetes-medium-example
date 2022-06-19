@@ -14,12 +14,16 @@ COPY requirements.txt ${WORKDIR}
 RUN pip install -U pip && \
   pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 8080
+EXPOSE 5000
 
-ARG DB_CONN=postgresql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_NAME}
+ENV DB_NAME=postgres
+ENV DB_USERNAME=postgres
+ENV DB_HOST=127.0.0.1
+ENV DB_PASSWORD=password
+ENV DEFAULT_ARTIFACT_ROOT=gs://example
 
 ENTRYPOINT mlflow server \
   --host=0.0.0.0 \
-  --port=8080 \
-  --backend-store-uri=${DB_CONN} \
+  --port=5000 \
+  --backend-store-uri=postgresql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_NAME} \
   --default-artifact-root=${DEFAULT_ARTIFACT_ROOT}
