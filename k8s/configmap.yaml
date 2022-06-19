@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mlflow-configmap
+data:
+  # property-like keys; each key maps to a simple value
+  DEFAULT_ARTIFACT_ROOT: "gs://your_gs_uri"
+  DB_NAME: postgres
+  DB_USERNAME: postgres
+  DB_HOST: "<YOUR_DB_PUBLIC_IP>"
